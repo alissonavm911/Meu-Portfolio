@@ -1,0 +1,258 @@
+:root {
+  --border: 2px solid gold;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  color: white;
+  background-color: #121212; /* Fundo escuro para destacar o texto branco */
+  font-family: sans-serif;
+}
+
+.header {
+  background: rgb(0, 0, 0);
+  padding: 8px;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  left: 0;
+  top: 0;
+  border-bottom: var(--border);
+  text-align: center;
+  a {
+    text-decoration-line: none;
+    padding: 4px;
+    border-radius: 10px;
+  }
+  nav {
+    border: 1px solid white;
+    padding: 3px;
+    display: flex;
+    background: rgb(0, 0, 0);
+    gap: 15px;
+    justify-content: center;
+    font-size: 20px;
+  }
+}
+
+.signUp {
+  background: white;
+  color: rgb(0, 0, 0);
+}
+
+.signIn {
+  background: white;
+  color: black;
+}
+
+.signUp1 {
+  color: rgb(255, 255, 255);
+}
+
+.signIn1 {
+  color: rgb(255, 255, 255);
+}
+
+.container {
+  display: flex;
+  gap: 15px;
+  margin-top: 3em;
+  justify-content: center;
+}
+
+.container_2 {
+  width: 80%;
+  border-radius: 5px;
+  border: var(--border);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  color: rgb(255, 255, 255);
+  height: 20em;
+  justify-content: center;
+  input {
+    margin: 5px;
+    width: 50%;
+    padding: 6px;
+    border-radius: 5px;
+  }
+  button {
+    margin-top: 5px;
+    padding: 8px;
+    width: 40%;
+    box-shadow: 3px 5px 0px 0px rgb(0, 0, 0);
+    border-radius: 5px;
+    top: 15em;
+    cursor: pointer;
+  }
+  button:hover {
+    transform: scale(1.1);
+    background: rgb(77, 69, 69);
+  }
+}
+
+.container_1 {
+  width: 80%;
+  border-radius: 5px;
+  border: var(--border);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  color: rgb(255, 255, 255);
+  height: 20em;
+  justify-content: center;
+  input {
+    margin: 5px;
+    width: 50%;
+    padding: 6px;
+    border-radius: 5px;
+  }
+  button {
+    margin-top: 5px;
+    padding: 8px;
+    width: 40%;
+    box-shadow: 3px 5px 0px 0px rgb(0, 0, 0);
+    border-radius: 5px;
+    top: 15em;
+    cursor: pointer;
+  }
+  button:hover {
+    transform: scale(1.1);
+    background: rgb(77, 69, 69);
+  }
+}
+
+.footer {
+  background: black;
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  bottom: 0;
+  border-top: var(--border);
+  h3 {
+    margin-left: 20px;
+  }
+}
+
+/*(//////////////////////////////////////////////////*/
+
+.title {
+  background: black;
+  padding: 8px;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: space-between; /* título à esquerda, botão à direita */
+  align-items: center;
+  border-bottom: 2px solid gold;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.logout {
+  position: fixed;
+  padding: 8px;
+  right: 10px;
+  top: 30px;
+  color: white;
+  border-radius: 10px;
+  background: black;
+  border: 1px solid rgb(255, 255, 255);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background: gray;
+  transform: scale(1.1);
+}
+
+.user h5 {
+  width: 100%; /* Ocupa toda a largura da div .user */
+  margin: 8px; /* Espaço entre as linhas */
+  white-space: nowrap; /* Não quebra linha */
+  text-overflow: ellipsis; /* Coloca os ... */
+  text-align: left; /* Garante alinhamento à esquerda */
+}
+
+.dashboard {
+  border: 1px solid whitesmoke;
+  border-radius: 10px;
+  width: 200%;
+  margin: 2em auto;
+  height: auto;          /* altura automática */
+  text-align: center;
+  background: #2a2a2a;
+  padding: 15px;
+  left: 50%;
+  transform: translateX(-20%);
+}
+
+.mainADM {
+  display: flex;
+  justify-content: center;
+}
+
+.dashboardADM {
+  margin-top: 2em;
+  padding: 2em auto;
+  width: 80%;
+}
+
+.footer1 {
+  background: black;
+  border-top: 2px solid gold;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+.exibitionUsers {
+  display: flex;
+  flex-direction: column;   /* coloca os cards na vertical */
+  gap: 10px;                /* espaço entre cada card */
+  max-height: 4000px;        /* altura máxima da lista */
+  overflow-y: auto;         /* ativa barra de rolagem vertical */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #494848;
+}
+
+/* cada usuário */
+.userCard {
+  background: #191818;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.putButton {
+  background: darkgray;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.delButton {
+  background: darkgray;
+  border-radius: 5px;
+  margin-left: 1em;
+  padding: 8px;
+}
+
+.putButton:hover {
+  background: gray;
+  transform: scale(1.1);
+}
+
+.delButton:hover {
+  background: gray;
+  transform: scale(1.1);
+}

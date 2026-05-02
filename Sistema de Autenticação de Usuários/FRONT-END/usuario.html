@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DashBoard do Usuário</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        padding-top: 80px; /* Empurra o conteúdo para baixo da faixa dourada */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body onload="informaçõesUsuario()">
+    <header class="title">
+    <h1>Configurações de Usuário</h1>
+    <button class="logout">Desconectar Conta</button> 
+    </header>
+
+    <main>
+      <section class="dashboard">
+        <h1>Lista dos Usuário</h1>
+        <p class="exibitionUsers"><button onclick="mostrarUsuarios()">Mostrar Usuarios</button></p>
+      </section>
+    </main>
+   
+    <footer class="footer1"></footer>
+    <script src="script.js"></script>
+  </body>
+</html>
