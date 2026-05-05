@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arquivo HTML</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- SCRIPT CORRIGIDO ABAIXO -->
-    <script src="https://google.com" async defer></script>
+    <!-- 1. SCRIPT CORRETO DO GOOGLE (OBRIGATÓRIO) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body>
     <header class="header">
@@ -24,21 +24,46 @@
         </header>
         <form>
           Email:
-          <input type="email" name="email" class="email" placeholder="name@example.com" />
+          <input
+            type="email"
+            name="email"
+            class="email"
+            autocomplete="email"
+            placeholder="name@example.com"
+          />
           <br />
           Senha:
-          <input type="password" name="password" class="password" placeholder="senha" />
+          <input
+            type="password"
+            name="password"
+            autocomplete="current-password"
+            class="password"
+            placeholder="senha"
+          />
           <br />
           <button class="button2" type="button">Entrar</button>
 
-          <!-- CONFIGURAÇÃO GOOGLE -->
-          <div id="g_id_onload"
+          <!-- 2. CONFIGURAÇÃO COM SEU ID -->
+          <div
+            id="g_id_onload"
             data-client_id="93964721445-u2s1htqo5rfdhojv2792ptpuqscl1bga.apps.googleusercontent.com"
-            data-callback="handleCredentialResponse">
-          </div>
-          <div class="g_id_signin" data-type="standard"></div>
-          
-          <div id="mensagem" style="margin-top: 20px; font-family: Arial"></div>
+            data-context="signin"
+            data-ux_mode="popup"
+            data-callback="handleCredentialResponse"
+            data-auto_prompt="false"
+          ></div>
+
+          <!-- 3. O BOTÃO DO GOOGLE -->
+          <div
+            class="g_id_signin"
+            data-type="standard"
+            data-size="large"
+            data-theme="outline"
+            data-text="signin_with"
+            data-shape="rectangular"
+            data-logo_alignment="left"
+            onclick=""
+          ></div>
         </form>
       </section>
     </main>
@@ -50,16 +75,15 @@
     <script src="script.js"></script>
     <script>
       function handleCredentialResponse(response) {
-        // Decodifica a parte central do token JWT
-        const data = JSON.parse(atob(response.credential.split('.')[1]));
-        
-        console.log("Dados do usuário:", data);
+        // Decodifica o token para pegar os dados
+        const data = JSON.parse(atob(response.credential.split(".")[1]));
+
+        console.log("Usuário logado:", data);
 
         const mensagem = document.getElementById("mensagem");
         mensagem.innerHTML = `
           <h3>Bem-vindo, ${data.name}!</h3>
-          <p>Email: ${data.email}</p>
-          <img src="${data.picture}" alt="Foto do perfil" style="border-radius: 50%; width: 50px;">
+          <img src="${data.picture}" alt="Foto" style="border-radius: 50%; width: 50px;">
         `;
       }
     </script>

@@ -93,16 +93,40 @@ async function cadastrarUsuário() {
   }
 }
 
+// ================= REDIRECIONAMENTO =================
+
+function redirecionarUsuario() {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  const payload = JSON.parse(atob(token.split(".")[1]));
+
+  if (payload.admin) {
+    window.location.href = "admin.html";
+  } else {
+    window.location.href = "usuario.html";
+  }
+}
+
 // ================= LOGIN =================
 
 async function logarUsuario() {
   const email = document.querySelector(".email").value;
   const password = document.querySelector(".password").value;
 
+  if (!email || !password) {
+    alert("Preencha todos os campos");
+    return;
+  }
+
   try {
     const res = await fetch("http://localhost:3000/login", {
       method: "POST",
-      headers: { "Content-type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
 
@@ -122,22 +146,33 @@ async function logarUsuario() {
   }
 }
 
-// ================= REDIRECIONAMENTO =================
+// ================= LOGIN - GOOGLE ===================
 
-function redirecionarUsuario() {
-  const token = localStorage.getItem("token");
+async function handleCredentialResponse(response) {
+  const token = response.credential;
 
-  if (!token) {
-    window.location.href = "index.html";
-    return;
-  }
+  try {
+    const res = await fetch("http://localhost:3000/google-login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token }),
+    });
 
-  const payload = JSON.parse(atob(token.split(".")[1]));
+    const data = await res.json();
 
-  if (payload.admin) {
-    window.location.href = "admin.html";
-  } else {
-    window.location.href = "usuario.html";
+    if (!res.ok) {
+      alert("Erro no login com Google");
+      return;
+    }
+
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("refreshToken", data.refreshToken);
+
+    redirecionarUsuario();
+  } catch (err) {
+    console.error("Erro:", err);
   }
 }
 
@@ -260,7 +295,7 @@ async function atualizarUsuario(el) {
           nome: novoNome,
           admin: ehAdmin,
         }),
-      }
+      },
     );
 
     const data = await res.json();
@@ -279,7 +314,7 @@ async function apagarUsuario(el) {
   try {
     const res = await fetchComAuth(
       `http://localhost:3000/users/delete/${encodeURIComponent(emailUser)}`,
-      { method: "DELETE" }
+      { method: "DELETE" },
     );
 
     const data = await res.json();

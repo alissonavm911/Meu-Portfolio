@@ -256,3 +256,10 @@ html {
   background: gray;
   transform: scale(1.1);
 }
+
+.g_id_signin {
+  color: black;
+  margin: 1em;
+  display: flex;
+  justify-content: center;
+}
