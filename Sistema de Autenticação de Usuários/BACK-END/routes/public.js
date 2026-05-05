@@ -1,4 +1,4 @@
-// Configurações
+// ======================= Configurações =======================
 import express from "express";
 import bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
@@ -12,7 +12,8 @@ const REFRESH_SECRET = process.env.REFRESH_SECRET;
 const client = new OAuth2Client(process.env.CLIENT_ID);
 router.use(express.json());
 
-// CADASTRO
+// ======================= CADASTRO =======================
+
 router.post("/cadastro", async (req, res) => {
   try {
     const user = req.body;
@@ -48,7 +49,8 @@ router.post("/cadastro", async (req, res) => {
   }
 });
 
-// LOGIN
+// ======================= LOGIN =======================
+
 router.post("/login", async (req, res) => {
   try {
     const userInfo = req.body;
@@ -106,7 +108,8 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// LOGIN - GOOGLE
+// ======================= LOGIN - GOOGLE =======================
+
 router.post("/google-login", async (req, res) => {
   const { token: googleToken } = req.body;
 
@@ -168,7 +171,8 @@ router.post("/google-login", async (req, res) => {
   }
 });
 
-// REFRESH TOKEN
+// ======================= REFRESH TOKEN =======================
+
 router.post("/refresh", async (req, res) => {
   const { refreshToken: oldToken } = req.body;
 

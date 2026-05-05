@@ -1,4 +1,4 @@
-// Configurações
+// ======================= Configurações =======================
 import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -11,7 +11,8 @@ const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET;
 router.use(express.json());
 
-// Verifica o Token
+// ======================= Verifica o Token =======================
+
 router.get("/perfil", auth, async (req, res) => {
   try {
     const authHeader = req.headers["authorization"];
@@ -43,7 +44,8 @@ router.get("/perfil", auth, async (req, res) => {
   }
 });
 
-// ADMIN
+// ======================= ADMIN =======================
+
 router.get("/admin", auth, adminOnly, async (req, res) => {
   try {
     const users = await prisma.user.findMany({
@@ -97,7 +99,8 @@ router.delete("/users/delete/:email", auth, adminOnly, async (req, res) => {
   }
 });
 
-// USUÁRIOS
+// ======================= USUÁRIOS =======================
+
 router.get("/users", auth, async (req, res) => {
   try {
     const users = await prisma.user.findMany({
