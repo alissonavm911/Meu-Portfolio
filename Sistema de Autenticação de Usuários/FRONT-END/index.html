@@ -62,8 +62,8 @@
             data-text="signin_with"
             data-shape="rectangular"
             data-logo_alignment="left"
-            onclick=""
           ></div>
+          <div id="mensagem"></div>
         </form>
       </section>
     </main>
@@ -73,19 +73,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-      function handleCredentialResponse(response) {
-        // Decodifica o token para pegar os dados
-        const data = JSON.parse(atob(response.credential.split(".")[1]));
-
-        console.log("Usuário logado:", data);
-
-        const mensagem = document.getElementById("mensagem");
-        mensagem.innerHTML = `
-          <h3>Bem-vindo, ${data.name}!</h3>
-          <img src="${data.picture}" alt="Foto" style="border-radius: 50%; width: 50px;">
-        `;
-      }
-    </script>
   </body>
 </html>

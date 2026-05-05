@@ -148,33 +148,48 @@ async function logarUsuario() {
 
 // ================= LOGIN - GOOGLE ===================
 
-async function handleCredentialResponse(response) {
-  const token = response.credential;
+window.handleCredentialResponse = function (response) {
+  console.log("Google response:", response);
 
   try {
-    const res = await fetch("http://localhost:3000/google-login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token }),
-    });
+    const data = JSON.parse(atob(response.credential.split(".")[1]));
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      alert("Erro no login com Google");
-      return;
+    const mensagem = document.getElementById("mensagem");
+    if (mensagem) {
+      mensagem.innerHTML = `
+        <h3>Bem-vindo, ${data.name}!</h3>
+        <img src="${data.picture}" style="width:50px;border-radius:50%">
+      `;
     }
-
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("refreshToken", data.refreshToken);
-
-    redirecionarUsuario();
-  } catch (err) {
-    console.error("Erro:", err);
+  } catch (e) {
+    console.warn("Erro ao decodificar:", e);
   }
-}
+
+  fetch("http://localhost:3000/google-login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: response.credential,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("BACKEND:", data);
+
+      if (!data.token) {
+        alert("Erro no login");
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("refreshToken", data.refreshToken);
+
+      redirecionarUsuario();
+    })
+    .catch((err) => console.error("Erro:", err));
+};
 
 // ================= LOGOUT =================
 

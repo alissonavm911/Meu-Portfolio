@@ -134,7 +134,7 @@ router.post("/google-login", async (req, res) => {
       },
     });
 
-    const accessToken = jwt.sign(
+    const token = jwt.sign(
       {
         id: user.id,
         email: user.email,
@@ -162,7 +162,7 @@ router.post("/google-login", async (req, res) => {
       data: { refreshToken },
     });
 
-    res.json({ token: accessToken, refreshToken });
+    res.json({ token, refreshToken });
   } catch (err) {
     res.status(401).json({ mensagem: "Token inválido" });
   }
