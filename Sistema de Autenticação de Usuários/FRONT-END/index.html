@@ -1,42 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arquivo HTML</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="header">
-    <h1>Sistema de Usuários</h1>
-    <nav>
-      <a href="index.html" class="signIn">Login</a>
-      <a href="signUp.html" class="signUp1">Cadastro</a>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arquivo HTML</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- SCRIPT CORRIGIDO ABAIXO -->
+    <script src="https://google.com" async defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Sistema de Usuários</h1>
+      <nav>
+        <a href="index.html" class="signIn">Login</a>
+        <a href="signUp.html" class="signUp1">Cadastro</a>
+      </nav>
+    </header>
 
-  <main class="container">
-    <section class="container_2">
-      <header>
-        <h2>Conecte-se a sua conta!</h2>
-      </header>
-      <form>
-        Email:
-        <input type="email" name="email" autocomplete="email"  class="email" placeholder="name@example.com">
-        <br>
-        Senha:
-        <input type="password" autocomplete="new-password" name="password" class="password" placeholder="senha">
-        <br>
-        <button class="button2" type="button">Entrar</button>
-      </form>
-    </section>
-  </main>
+    <main class="container">
+      <section class="container_2">
+        <header>
+          <h2>Conecte-se a sua conta!</h2>
+        </header>
+        <form>
+          Email:
+          <input type="email" name="email" class="email" placeholder="name@example.com" />
+          <br />
+          Senha:
+          <input type="password" name="password" class="password" placeholder="senha" />
+          <br />
+          <button class="button2" type="button">Entrar</button>
 
-  <footer class="footer">
-    <h3 class="finalText">
-      Desenvolvido por Alisson A. V. Moreira &trade;
-    </h3>
-  </footer>
-  <script src="script.js"></script>
-</body>
+          <!-- CONFIGURAÇÃO GOOGLE -->
+          <div id="g_id_onload"
+            data-client_id="93964721445-u2s1htqo5rfdhojv2792ptpuqscl1bga.apps.googleusercontent.com"
+            data-callback="handleCredentialResponse">
+          </div>
+          <div class="g_id_signin" data-type="standard"></div>
+          
+          <div id="mensagem" style="margin-top: 20px; font-family: Arial"></div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <h3 class="finalText">Desenvolvido por Alisson A. V. Moreira &trade;</h3>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      function handleCredentialResponse(response) {
+        // Decodifica a parte central do token JWT
+        const data = JSON.parse(atob(response.credential.split('.')[1]));
+        
+        console.log("Dados do usuário:", data);
+
+        const mensagem = document.getElementById("mensagem");
+        mensagem.innerHTML = `
+          <h3>Bem-vindo, ${data.name}!</h3>
+          <p>Email: ${data.email}</p>
+          <img src="${data.picture}" alt="Foto do perfil" style="border-radius: 50%; width: 50px;">
+        `;
+      }
+    </script>
+  </body>
 </html>
