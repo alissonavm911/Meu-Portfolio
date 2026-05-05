@@ -149,21 +149,6 @@ async function logarUsuario() {
 // ================= LOGIN - GOOGLE ===================
 
 window.handleCredentialResponse = function (response) {
-  console.log("Google response:", response);
-
-  try {
-    const data = JSON.parse(atob(response.credential.split(".")[1]));
-
-    const mensagem = document.getElementById("mensagem");
-    if (mensagem) {
-      mensagem.innerHTML = `
-        <h3>Bem-vindo, ${data.name}!</h3>
-        <img src="${data.picture}" style="width:50px;border-radius:50%">
-      `;
-    }
-  } catch (e) {
-    console.warn("Erro ao decodificar:", e);
-  }
 
   fetch("http://localhost:3000/google-login", {
     method: "POST",
